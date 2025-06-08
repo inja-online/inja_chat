@@ -2,7 +2,7 @@
     import Tooltip from './Tooltip.svelte'; // Import the Tooltip component
 
     let {
-        viewType = "primary", // 'primary', 'secondary', 'outline', 'ghost'
+        viewType = "primary", // 'primary', 'outline', 'ghost'
         active = false,
         selected = false, // New prop for selected state
         rounded = true, // New prop for rounded styling
@@ -14,6 +14,7 @@
         disabled = false,
         class: additionalClasses = "",
         type: htmlType, // For <button type="submit|button|reset">
+        size = "md", // New prop
         ...restProps
     } = $props();
 
@@ -24,16 +25,13 @@
     const buttonHtmlType = Tag === "button" ? htmlType || "button" : undefined;
 
     let klasses = ["button"];
-    klasses.push(`button-${viewType}`); // e.g., button-primary, button-secondary, button-outline, button-ghost
+    klasses.push(`button-${viewType}`); // e.g., button-primary
+    klasses.push(`button-size-${size}`); // inject size class
     if (active) {
         klasses.push("active");
     }
-    if (!rounded && viewType !== 'ghost') { // Ghost has its own fixed radius logic usually
+    if (!rounded && viewType !== 'ghost') {
         klasses.push("button-half-rounded");
-    } else if (viewType === 'ghost') {
-        // Ghost buttons will have a specific border-radius defined in their style,
-        // effectively like button-half-rounded by default.
-        // No special class needed here if CSS for .button-ghost handles it.
     }
     if (additionalClasses) {
         klasses.push(additionalClasses);
@@ -142,7 +140,6 @@
         border-radius: 0.5rem; /* equivalent to rounded-lg */
     }
 
-    /* Primary Button Styles */
     .button-primary {
         background-color: hsl(var(--primary));
         color: hsl(var(--primary-foreground));
@@ -158,83 +155,85 @@
         background-color: hsl(var(--primary) / 0.8);
     }
 
-    /* Secondary Button Styles (formerly Outline) */
-    .button-secondary {
+    .button-outline {
         background-color: hsl(var(--secondary) / 0.3);
         border-color: transparent;
         color: hsl(var(--secondary-foreground) / 0.9);
         outline: 1px solid hsl(var(--secondary) / 0.7);
         backdrop-filter: blur(24px);
     }
-    .button-secondary:hover:not(:disabled) {
+    .button-outline:hover:not(:disabled) {
         background-color: hsl(var(--secondary));
         color: hsl(var(--secondary-foreground));
     }
-    .button-secondary.active {
+    .button-outline.active {
         background-color: hsl(var(--secondary));
         color: hsl(var(--secondary-foreground));
     }
     
-    .button-secondary[data-selected="false"] {
+    .button-outline[data-selected="false"] {
         background-color: hsl(var(--secondary) / 0.3);
         color: hsl(var(--secondary-foreground) / 0.9);
         outline: 1px solid hsl(var(--secondary) / 0.7);
     }
-    .button-secondary[data-selected="false"]:hover:not(:disabled) {
+    .button-outline[data-selected="false"]:hover:not(:disabled) {
         background-color: hsl(var(--secondary));
     }
 
-    /* Outline Button Styles (formerly Ghost) */
-    .button-outline {
+    .button-ghost {
         background-color: transparent;
         border: 1px solid hsl(var(--secondary-foreground) / 0.1);
         color: hsl(var(--muted-foreground));
         backdrop-filter: none;
         box-shadow: none;
     }
-    .button-outline:hover:not(:disabled) {
-        background-color: hsl(var(--muted-40)); /* Using CSS var */
-        color: hsl(var(--foreground));
-    }
-    .button-outline:disabled {
-        background-color: transparent; /* Ensure background is transparent */
-        color: hsl(var(--foreground-50)); /* Using CSS var, opacity also applies from .button:disabled */
-    }
-    .button-outline:disabled:hover {
-        background-color: transparent;
-        color: hsl(var(--foreground-50)); /* Using CSS var */
-    }
-    .button-outline.active {
-        background-color: hsl(var(--muted-40)); /* Using CSS var */
-        color: hsl(var(--foreground));
-    }
-
-    /* New Ghost Button Styles */
-    .button-ghost {
-        background-color: transparent;
-        color: hsl(var(--muted-foreground));
-        border: 1px solid transparent; /* Keeps layout stable, effectively borderless */
-        font-size: 0.75rem; /* text-xs */
-        height: 2rem; /* h-8 */
-        padding: 0.5rem; /* Suitable for icon-only (makes it 2rem x 2rem) or text with small padding */
-        border-radius: 0.5rem; /* rounded-lg, overrides default pill shape */
-        box-shadow: none;
-        backdrop-filter: none;
-    }
     .button-ghost:hover:not(:disabled) {
-        background-color: hsl(var(--muted-40)); /* Using CSS var */
+        background-color: hsl(var(--muted) / 0.4);
         color: hsl(var(--foreground));
     }
     .button-ghost:disabled {
-        background-color: transparent; /* Ensure background is transparent */
-        color: hsl(var(--foreground-50)); /* Using CSS var, opacity also applies from .button:disabled */
+        background-color: transparent;
+        color: hsl(var(--foreground) / 0.5);
     }
     .button-ghost:disabled:hover {
         background-color: transparent;
-        color: hsl(var(--foreground-50)); /* Using CSS var */
+        color: hsl(var(--foreground) / 0.5);
     }
     .button-ghost.active {
-        background-color: hsl(var(--muted-40)); /* Using CSS var */
+        background-color: hsl(var(--muted) / 0.4);
         color: hsl(var(--foreground));
+    }
+
+    /* Size utilities */
+    .button-size-xs {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+        height: 1.5rem;
+        gap: 0.25rem;
+    }
+    .button-size-sm {
+        font-size: 0.8125rem;
+        padding: 0.5rem 0.75rem;
+        height: 1.75rem;
+        gap: 0.375rem;
+    }
+    .button-size-md {
+        /* default; you may omit if identical to base .button */
+        font-size: 0.875rem;
+        padding: 0.5rem 1.25rem;
+        height: 2.25rem;
+        gap: 0.5rem;
+    }
+    .button-size-lg {
+        font-size: 1rem;
+        padding: 0.75rem 1.5rem;
+        height: 2.5rem;
+        gap: 0.75rem;
+    }
+    .button-size-xl {
+        font-size: 1.125rem;
+        padding: 1rem 2rem;
+        height: 3rem;
+        gap: 1rem;
     }
 </style>

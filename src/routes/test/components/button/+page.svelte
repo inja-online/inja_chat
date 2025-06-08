@@ -19,22 +19,69 @@
 	</div>
 
 	<div class="test-section">
-		<h2 class="section-title">Secondary Button (formerly Outline)</h2>
+		<h2 class="section-title">Secondary Button</h2>
 		<Button viewType="secondary" onclick={handleButtonClick}>Secondary Action</Button>
 	</div>
 
 	<div class="test-section">
-		<h2 class="section-title">Outline Button (formerly Ghost)</h2>
+		<h2 class="section-title">Outline Button</h2>
 		<Button viewType="outline" onclick={handleButtonClick}>Outline Action</Button>
 	</div>
 
 	<div class="test-section">
-		<h2 class="section-title">New Ghost Button</h2>
+		<h2 class="section-title">Ghost Button</h2>
 		<Button viewType="ghost" onclick={handleButtonClick}>Ghost Action</Button>
 		<Button viewType="ghost" icon="👻" aria-label="Ghost Icon Button" onclick={handleButtonClick}></Button>
 		<Button viewType="ghost" icon="⚙️" onclick={handleButtonClick}>Settings</Button>
 	</div>
-	
+
+	<div class="test-section">
+		<h2 class="section-title">Button Sizes</h2>
+		<div class="button-group">
+			<Button size="xs" onclick={handleButtonClick}>XS Button</Button>
+			<Button size="sm" onclick={handleButtonClick}>SM Button</Button>
+			<Button size="md" onclick={handleButtonClick}>MD Button (Default)</Button>
+			<Button size="lg" onclick={handleButtonClick}>LG Button</Button>
+			<Button size="xl" onclick={handleButtonClick}>XL Button</Button>
+		</div>
+		<div class="button-group" style="margin-top: 0.5rem;">
+			<Button viewType="secondary" size="xs" onclick={handleButtonClick}>XS Secondary</Button>
+			<Button viewType="secondary" size="sm" onclick={handleButtonClick}>SM Secondary</Button>
+			<Button viewType="secondary" size="md" onclick={handleButtonClick}>MD Secondary</Button>
+			<Button viewType="secondary" size="lg" onclick={handleButtonClick}>LG Secondary</Button>
+			<Button viewType="secondary" size="xl" onclick={handleButtonClick}>XL Secondary</Button>
+		</div>
+		<div class="button-group" style="margin-top: 0.5rem;">
+			<Button viewType="outline" size="xs" onclick={handleButtonClick}>XS Outline</Button>
+			<Button viewType="outline" size="sm" onclick={handleButtonClick}>SM Outline</Button>
+			<Button viewType="outline" size="md" onclick={handleButtonClick}>MD Outline</Button>
+			<Button viewType="outline" size="lg" onclick={handleButtonClick}>LG Outline</Button>
+			<Button viewType="outline" size="xl" onclick={handleButtonClick}>XL Outline</Button>
+		</div>
+		<div class="button-group" style="margin-top: 0.5rem;">
+			<Button viewType="ghost" size="xs" onclick={handleButtonClick}>XS Ghost</Button>
+			<Button viewType="ghost" size="sm" onclick={handleButtonClick}>SM Ghost</Button>
+			<Button viewType="ghost" size="md" onclick={handleButtonClick}>MD Ghost</Button>
+			<Button viewType="ghost" size="lg" onclick={handleButtonClick}>LG Ghost</Button>
+			<Button viewType="ghost" size="xl" onclick={handleButtonClick}>XL Ghost</Button>
+		</div>
+		<h3 class="section-title" style="margin-top: 1rem;">Icon Buttons with Sizes</h3>
+		<div class="button-group">
+			<Button icon="🚀" size="xs" onclick={handleButtonClick}></Button>
+			<Button icon="🚀" size="sm" onclick={handleButtonClick}></Button>
+			<Button icon="🚀" size="md" onclick={handleButtonClick}></Button>
+			<Button icon="🚀" size="lg" onclick={handleButtonClick}></Button>
+			<Button icon="🚀" size="xl" onclick={handleButtonClick}></Button>
+		</div>
+		<div class="button-group" style="margin-top: 0.5rem;">
+			<Button icon="🌟" viewType="secondary" size="xs" onclick={handleButtonClick}></Button>
+			<Button icon="🌟" viewType="secondary" size="sm" onclick={handleButtonClick}></Button>
+			<Button icon="🌟" viewType="secondary" size="md" onclick={handleButtonClick}></Button>
+			<Button icon="🌟" viewType="secondary" size="lg" onclick={handleButtonClick}></Button>
+			<Button icon="🌟" viewType="secondary" size="xl" onclick={handleButtonClick}></Button>
+		</div>
+	</div>
+
 	<div class="test-section">
 		<h2 class="section-title">Active Button (Primary)</h2>
 		<Button viewType="primary" active={true} onclick={handleButtonClick}>Active Primary</Button>
@@ -127,9 +174,8 @@
 		<Button type="reset" viewType="ghost" onclick={() => alert('Form reset (simulated)')}>Reset Form</Button>
 	</div>
 
-	<!-- Add new section for rounded variants -->
-	<section class="test-section"> <!-- Added test-section class for consistent styling -->
-		<h3 class="section-title">Rounded Variants</h3> <!-- Changed to section-title -->
+	<section class="test-section">
+		<h3 class="section-title">Rounded Variants</h3>
 		<div class="button-group">
 			<Button viewType="primary" rounded={true}>Full Round (default)</Button>
 			<Button viewType="primary" rounded={false}>Half Round</Button>
@@ -137,7 +183,7 @@
 			<Button viewType="secondary" rounded={false}>Half Round Secondary</Button>
 			<Button viewType="outline" rounded={true}>Full Round Outline</Button>
 			<Button viewType="outline" rounded={false}>Half Round Outline</Button>
-			<Button viewType="ghost" rounded={true}>Ghost (Pill - if supported by rounded prop)</Button> <!-- Ghost default is 0.5rem, rounded=true might make it pill -->
+			<Button viewType="ghost" rounded={true}>Ghost (Pill - if supported by rounded prop)</Button>
 			<Button viewType="ghost" rounded={false}>Ghost (Half Round - default for ghost)</Button>
 		</div>
 	</section>
@@ -155,7 +201,7 @@
 				icon="➡️"
 				tooltip="Right tooltip on ghost button"
 				tooltipPosition="right"
-				rounded={false} <!-- Ghost is already 0.5rem radius -->
+				rounded={false}
 			></Button>
 			<Button viewType="primary" disabled tooltip="This button is disabled">Disabled with Tooltip</Button>
 		</div>
