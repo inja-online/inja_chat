@@ -155,41 +155,67 @@
         background-color: hsl(var(--primary) / 0.8);
     }
 
-    .button-outline {
+    .button-secondary {
         background-color: hsl(var(--secondary) / 0.3);
         border-color: transparent;
         color: hsl(var(--secondary-foreground) / 0.9);
         outline: 1px solid hsl(var(--secondary) / 0.7);
         backdrop-filter: blur(24px);
     }
-    .button-outline:hover:not(:disabled) {
+    .button-secondary:hover:not(:disabled) {
         background-color: hsl(var(--secondary));
         color: hsl(var(--secondary-foreground));
     }
-    .button-outline.active {
+    .button-secondary.active {
         background-color: hsl(var(--secondary));
         color: hsl(var(--secondary-foreground));
     }
     
-    .button-outline[data-selected="false"] {
+    .button-secondary[data-selected="false"] {
         background-color: hsl(var(--secondary) / 0.3);
         color: hsl(var(--secondary-foreground) / 0.9);
         outline: 1px solid hsl(var(--secondary) / 0.7);
     }
-    .button-outline[data-selected="false"]:hover:not(:disabled) {
+    .button-secondary[data-selected="false"]:hover:not(:disabled) {
         background-color: hsl(var(--secondary));
     }
 
-    .button-ghost {
+    .button-outline {
         background-color: transparent;
         border: 1px solid hsl(var(--secondary-foreground) / 0.1);
         color: hsl(var(--muted-foreground));
         backdrop-filter: none;
         box-shadow: none;
     }
-    .button-ghost:hover:not(:disabled) {
+    .button-outline:hover:not(:disabled) {
         background-color: hsl(var(--muted) / 0.4);
         color: hsl(var(--foreground));
+    }
+    .button-outline:disabled {
+        background-color: transparent;
+        color: hsl(var(--foreground) / 0.5);
+    }
+    .button-outline:disabled:hover {
+        background-color: transparent;
+        color: hsl(var(--foreground) / 0.5);
+    }
+    .button-outline.active {
+        background-color: hsl(var(--muted) / 0.4);
+        color: hsl(var(--foreground));
+    }
+
+
+
+    .button-ghost {
+        background-color: transparent;
+        border: none;
+        color: hsl(var(--muted-foreground));
+        backdrop-filter: none;
+        box-shadow: none;
+    }
+    .button-ghost:hover:not(:disabled) {
+        background-color: none;
+        color: none;
     }
     .button-ghost:disabled {
         background-color: transparent;
@@ -200,8 +226,8 @@
         color: hsl(var(--foreground) / 0.5);
     }
     .button-ghost.active {
-        background-color: hsl(var(--muted) / 0.4);
-        color: hsl(var(--foreground));
+        background-color: none;
+        color: none;
     }
 
     /* Size utilities */
