@@ -4,17 +4,17 @@
     let {
         viewType = "primary", // 'primary', 'outline', 'ghost'
         active = false,
-        selected = false, // New prop for selected state
-        rounded = true, // New prop for rounded styling
-        tooltip = undefined as string | undefined, // Tooltip text
-        tooltipPosition = 'top' as 'top' | 'bottom' | 'left' | 'right', // Tooltip position
+        selected = false,
+        rounded = true,
+        tooltip = undefined as string | undefined,
+        tooltipPosition = 'top' as 'top' | 'bottom' | 'left' | 'right',
         onclick: MouseHandler = (event?: MouseEvent) => {},
         href = undefined,
         icon = undefined,
         disabled = false,
         class: additionalClasses = "",
-        type: htmlType, // For <button type="submit|button|reset">
-        size = "md", // New prop
+        type: htmlType = undefined,
+        size = "md",
         ...restProps
     } = $props();
 
