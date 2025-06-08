@@ -153,6 +153,73 @@
                 onclick={handleButtonClick}
             ></Button>
         </div>
+        <div class="button-group" style="margin-top: 0.5rem;">
+            <Button
+                icon={Globe}
+                viewType="secondary"
+                size="xs"
+                aria-label="Globe XS Secondary"
+                onclick={handleButtonClick}
+            />
+            <Button
+                icon={Globe}
+                viewType="secondary"
+                size="sm"
+                aria-label="Globe SM Secondary"
+                onclick={handleButtonClick}
+            />
+            <Button
+                icon={Globe}
+                viewType="secondary"
+                size="md"
+                aria-label="Globe MD Secondary"
+                onclick={handleButtonClick}
+            />
+            <Button
+                icon={Globe}
+                viewType="secondary"
+                size="lg"
+                aria-label="Globe LG Secondary"
+                onclick={handleButtonClick}
+            />
+            <Button
+                icon={Globe}
+                viewType="secondary"
+                size="xl"
+                aria-label="Globe XL Secondary"
+                onclick={handleButtonClick}
+            />
+        </div>
+        <h3 class="section-title" style="margin-top: 1rem;">
+            Lucide Icon Buttons with Sizes (Primary)
+        </h3>
+        <div class="button-group">
+            <Button icon={Globe} size="xs" onclick={handleButtonClick} aria-label="Globe XS"></Button>
+            <Button icon={Globe} size="sm" onclick={handleButtonClick} aria-label="Globe SM"></Button>
+            <Button icon={Globe} size="md" onclick={handleButtonClick} aria-label="Globe MD"></Button>
+            <Button icon={Globe} size="lg" onclick={handleButtonClick} aria-label="Globe LG"></Button>
+            <Button icon={Globe} size="xl" onclick={handleButtonClick} aria-label="Globe XL"></Button>
+        </div>
+        <h3 class="section-title" style="margin-top: 1rem;">
+            Lucide Icon Buttons with Sizes (Outline)
+        </h3>
+        <div class="button-group">
+            <Button viewType="outline" icon={Globe} size="xs" onclick={handleButtonClick} aria-label="Globe XS Outline"></Button>
+            <Button viewType="outline" icon={Globe} size="sm" onclick={handleButtonClick} aria-label="Globe SM Outline"></Button>
+            <Button viewType="outline" icon={Globe} size="md" onclick={handleButtonClick} aria-label="Globe MD Outline"></Button>
+            <Button viewType="outline" icon={Globe} size="lg" onclick={handleButtonClick} aria-label="Globe LG Outline"></Button>
+            <Button viewType="outline" icon={Globe} size="xl" onclick={handleButtonClick} aria-label="Globe XL Outline"></Button>
+        </div>
+        <h3 class="section-title" style="margin-top: 1rem;">
+            Lucide Icon Buttons with Sizes (Ghost)
+        </h3>
+        <div class="button-group">
+            <Button viewType="ghost" icon={Globe} size="xs" onclick={handleButtonClick} aria-label="Globe XS Ghost"></Button>
+            <Button viewType="ghost" icon={Globe} size="sm" onclick={handleButtonClick} aria-label="Globe SM Ghost"></Button>
+            <Button viewType="ghost" icon={Globe} size="md" onclick={handleButtonClick} aria-label="Globe MD Ghost"></Button>
+            <Button viewType="ghost" icon={Globe} size="lg" onclick={handleButtonClick} aria-label="Globe LG Ghost"></Button>
+            <Button viewType="ghost" icon={Globe} size="xl" onclick={handleButtonClick} aria-label="Globe XL Ghost"></Button>
+        </div>
     </div>
 
     <div class="test-section">
@@ -220,47 +287,45 @@
     </div>
 
     <div class="test-section">
-        <h2 class="section-title">Button with Icon and Custom Slot Content</h2>
-        <Button icon="⭐" onclick={handleButtonClick}>
-            <span>Rate Us Please!</span>
-        </Button>
+        <h2 class="section-title">Button with Icon (Lucide Component)</h2>
+        <Button icon={Globe} onclick={handleButtonClick}>Launch with Globe</Button>
     </div>
 
     <div class="test-section">
-        <h2 class="section-title">Icon-only Button (Primary)</h2>
+        <h2 class="section-title">Icon-only Button (Primary - Lucide)</h2>
         <Button
-            icon="⚙️"
+            icon={Globe}
             viewType="primary"
-            aria-label="Settings"
+            aria-label="Settings with Globe"
             onclick={handleButtonClick}
-        ></Button>
+        />
     </div>
     <div class="test-section">
-        <h2 class="section-title">Icon-only Button (Secondary)</h2>
+        <h2 class="section-title">Icon-only Button (Secondary - Lucide)</h2>
         <Button
-            icon="🗑️"
+            icon={Globe}
             viewType="secondary"
-            aria-label="Delete"
+            aria-label="Delete with Globe"
             onclick={handleButtonClick}
-        ></Button>
+        />
     </div>
     <div class="test-section">
-        <h2 class="section-title">Icon-only Button (Outline - New)</h2>
+        <h2 class="section-title">Icon-only Button (Outline - Lucide)</h2>
         <Button
-            icon="✏️"
+            icon={Globe}
             viewType="outline"
-            aria-label="Edit"
+            aria-label="Edit with Globe"
             onclick={handleButtonClick}
-        ></Button>
+        />
     </div>
     <div class="test-section">
-        <h2 class="section-title">Icon-only Button (Ghost - New)</h2>
+        <h2 class="section-title">Icon-only Button (Ghost - Lucide)</h2>
         <Button
-            icon="📋"
+            icon={Globe}
             viewType="ghost"
-            aria-label="Copy"
+            aria-label="Copy with Globe"
             onclick={handleButtonClick}
-        ></Button>
+        />
     </div>
 
     <div class="test-section">

@@ -10,7 +10,7 @@
         tooltipPosition = 'top' as 'top' | 'bottom' | 'left' | 'right',
         onclick: MouseHandler = (event?: MouseEvent) => {},
         href = undefined,
-        icon = undefined,
+        icon = undefined as string | undefined | typeof import("svelte").SvelteComponent,
         disabled = false,
         class: additionalClasses = "",
         type: htmlType = undefined,
@@ -33,6 +33,30 @@
     if (!rounded && viewType !== 'ghost') {
         klasses.push("button-half-rounded");
     }
+
+    // Check if there's slot content
+    let hasSlotContent = false;
+    $effect(() => {
+        // This is a bit of a hack for Svelte 5 runes to check slot content.
+        // It assumes that if the slot has more than just whitespace, it has content.
+        // A more robust solution might involve a renderless component or context API
+        // if direct slot inspection becomes easier in Svelte 5.
+        const slotEl = document.getElementById(`slot-checker-${restProps.id || Math.random().toString(36).substring(2)}`);
+        if (slotEl) {
+            hasSlotContent = slotEl.textContent?.trim() !== "";
+        }
+        // If no slot content and icon is present, it's an icon-only button
+        if (icon && !hasSlotContent) {
+            klasses.push("button-icon-only");
+        } else {
+            const index = klasses.indexOf("button-icon-only");
+            if (index > -1) {
+                klasses.splice(index, 1);
+            }
+        }
+    });
+
+
     if (additionalClasses) {
         klasses.push(additionalClasses);
     }
@@ -70,10 +94,12 @@
     >
         {#if typeof icon === "string"}
             <span class="icon">{icon}</span>
-        {:else if icon}
+        {:else if typeof icon === "function" || (typeof icon === "object" && icon && 'render' in icon)}
             <svelte:component this={icon} class="icon" />
         {/if}
-        <slot>Explore</slot>
+        <span style="display: contents;" id={`slot-checker-${restProps.id || Math.random().toString(36).substring(2)}`}>
+            <slot></slot>
+        </span>
     </svelte:element>
     {#if tooltip}
         <Tooltip
@@ -117,6 +143,37 @@
         box-shadow: var(--shadow-sm);
     }
 
+    .button.button-icon-only {
+        padding: 0; /* Remove padding for icon-only */
+        /* Ensure square shape for icon-only buttons by setting width equal to height */
+        /* This will be dynamically adjusted by size classes */
+    }
+    .button.button-icon-only .icon {
+        margin: 0; /* No margin for icon if it's the only child */
+    }
+    /* Adjust padding for icon-only buttons based on size */
+    .button-size-xs.button-icon-only {
+        width: 1.5rem; /* Same as height */
+        padding: 0.25rem;
+    }
+    .button-size-sm.button-icon-only {
+        width: 1.75rem; /* Same as height */
+        padding: 0.375rem;
+    }
+    .button-size-md.button-icon-only {
+        width: 2.25rem; /* Same as height */
+        padding: 0.5rem;
+    }
+    .button-size-lg.button-icon-only {
+        width: 2.5rem; /* Same as height */
+        padding: 0.625rem;
+    }
+    .button-size-xl.button-icon-only {
+        width: 3rem; /* Same as height */
+        padding: 0.75rem;
+    }
+
+
     .button:focus-visible {
         outline: 1px solid hsl(var(--ring));
         outline-offset: 2px;
@@ -134,6 +191,25 @@
         height: 1rem;
         flex-shrink: 0;
         pointer-events: none;
+    }
+
+    /* Icon size adjustments within different button sizes */
+    .button-size-xs .icon {
+        width: 0.75rem;
+        height: 0.75rem;
+    }
+    .button-size-sm .icon {
+        width: 0.875rem;
+        height: 0.875rem;
+    }
+    /* .button-size-md .icon is default 1rem */
+    .button-size-lg .icon {
+        width: 1.125rem;
+        height: 1.125rem;
+    }
+    .button-size-xl .icon {
+        width: 1.25rem;
+        height: 1.25rem;
     }
 
     .button-half-rounded {
