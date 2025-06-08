@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte';
+	import SpecialButton from '$lib/components/SpecialButton.svelte'; // Import SpecialButton
 
-	import { Globe } from '@lucide/svelte';
     let clickCount = 0;
     const handleButtonClick = (event?: MouseEvent) => {
         clickCount++;
@@ -56,7 +56,7 @@
 
 	<div class="test-section">
 		<h2 class="section-title">Button with Icon</h2>
-		<Button icon={Globe} onclick={handleButtonClick}>Launch</Button>
+		<Button icon="🌍" onclick={handleButtonClick}>Launch</Button>
 	</div>
 
     <div class="test-section">
@@ -93,6 +93,48 @@
     <div class="test-section">
 		<h2 class="section-title">Reset Button (Ghost)</h2>
 		<Button type="reset" viewType="ghost" onclick={() => alert('Form reset (simulated)')}>Reset Form</Button>
+	</div>
+
+	<!-- Add new section for rounded variants -->
+	<section>
+		<h3>Rounded Variants</h3>
+		<div class="button-group">
+			<Button viewType="primary" rounded={true}>Full Round (default)</Button>
+			<Button viewType="primary" rounded={false}>Half Round</Button>
+			<Button viewType="outline" rounded={true}>Full Round Outline</Button>
+			<Button viewType="outline" rounded={false}>Half Round Outline</Button>
+			<Button viewType="ghost" rounded={true}>Full Round Ghost</Button>
+			<Button viewType="ghost" rounded={false}>Half Round Ghost</Button>
+		</div>
+	</section>
+
+	<div class="test-section">
+		<h2 class="section-title">Buttons with Tooltips</h2>
+		<div class="button-group">
+			<Button tooltip="This is a primary action!">Primary with Tooltip</Button>
+			<Button viewType="outline" tooltip="Tooltip on the bottom!" tooltipPosition="bottom">
+				Outline with Tooltip (Bottom)
+			</Button>
+			<Button viewType="ghost" icon="💡" tooltip="Left tooltip" tooltipPosition="left"></Button>
+			<Button
+				icon="➡️"
+				tooltip="Right tooltip on a half-rounded button"
+				tooltipPosition="right"
+				rounded={false}
+			></Button>
+			<Button viewType="primary" disabled tooltip="This button is disabled">Disabled with Tooltip</Button>
+		</div>
+	</div>
+
+	<div class="test-section">
+		<h2 class="section-title">Special Button</h2>
+		<SpecialButton href="/">New Chat (as link)</SpecialButton>
+		<div style="margin-top: 0.5rem;"></div>
+		<SpecialButton onclick={() => alert('Special button clicked!')}>
+			New Chat (as button)
+		</SpecialButton>
+		<div style="margin-top: 0.5rem;"></div>
+		<SpecialButton disabled={true}>Disabled Special Chat</SpecialButton>
 	</div>
 </div>
 
@@ -142,8 +184,15 @@
 
     /* Ensure buttons in a section have some space */
     .test-section > :global(button), 
-    .test-section > :global(a[role="button"]) {
+    .test-section > :global(a[role="button"]),
+    .test-section > :global(.button-wrapper) { /* Ensure wrapper also gets margin */
         margin-right: 0.5rem;
         margin-bottom: 0.5rem;
+    }
+
+    .button-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem; /* Adds space between buttons in a group */
     }
 </style>
