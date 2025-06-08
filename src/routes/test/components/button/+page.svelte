@@ -1,34 +1,149 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte';
+
+	import { Globe } from '@lucide/svelte';
+    let clickCount = 0;
+    const handleButtonClick = (event?: MouseEvent) => {
+        clickCount++;
+        console.log('Button clicked!', { count: clickCount, event });
+        // alert(`Button clicked! Count: ${clickCount}`);
+    };
 </script>
 
-<div class="p-4 space-y-4">
-	<h1 class="text-xl font-bold">Button Tests</h1>
+<div class="page-container">
+	<h1 class="page-title">Button Tests (CSS Styled)</h1>
 
-	<div>
-		<h2 class="text-lg font-semibold">Default Button</h2>
-		<Button />
+	<div class="test-section">
+		<h2 class="section-title">Default (Primary) Button</h2>
+		<Button onclick={handleButtonClick}>Primary Action</Button>
 	</div>
 
-	<div>
-		<h2 class="text-lg font-semibold">Selected Button</h2>
-		<Button selected={true}>Selected</Button>
+	<div class="test-section">
+		<h2 class="section-title">Outline Button</h2>
+		<Button viewType="outline" onclick={handleButtonClick}>Outline Action</Button>
 	</div>
 
-	<div>
-		<h2 class="text-lg font-semibold">Button with custom class</h2>
-		<Button class="bg-green-500 hover:bg-green-600/90">Custom Class</Button>
+	<div class="test-section">
+		<h2 class="section-title">Ghost Button</h2>
+		<Button viewType="ghost" onclick={handleButtonClick}>Ghost Action</Button>
 	</div>
 
-	<div>
-		<h2 class="text-lg font-semibold">Disabled Button</h2>
-		<Button disabled={true}>Disabled</Button>
+	<div class="test-section">
+		<h2 class="section-title">Active Button (Primary)</h2>
+		<Button viewType="primary" active={true} onclick={handleButtonClick}>Active Primary</Button>
 	</div>
 
-	<div>
-		<h2 class="text-lg font-semibold">Button with custom slot content</h2>
-		<Button>
-			<span>Click Me!</span>
-		</Button>
+    <div class="test-section">
+		<h2 class="section-title">Active Button (Outline)</h2>
+		<Button viewType="outline" active={true} onclick={handleButtonClick}>Active Outline</Button>
+	</div>
+
+	<div class="test-section">
+		<h2 class="section-title">Button with custom class</h2>
+		<Button class="my-custom-button-class" onclick={handleButtonClick}>Custom Styled</Button>
+        <p class="note">Note: 'my-custom-button-class' needs to be defined in your global CSS or this page's style block.</p>
+	</div>
+
+	<div class="test-section">
+		<h2 class="section-title">Disabled Button (Primary)</h2>
+		<Button disabled={true} onclick={handleButtonClick}>Cannot Click</Button>
+	</div>
+
+    <div class="test-section">
+		<h2 class="section-title">Disabled Button (Outline)</h2>
+		<Button viewType="outline" disabled={true} onclick={handleButtonClick}>Disabled Outline</Button>
+	</div>
+
+	<div class="test-section">
+		<h2 class="section-title">Button with Icon</h2>
+		<Button icon={Globe} onclick={handleButtonClick}>Launch</Button>
+	</div>
+
+    <div class="test-section">
+		<h2 class="section-title">Button with Icon and Custom Slot Content</h2>
+		<Button icon="⭐" onclick={handleButtonClick}>
+            <span>Rate Us Please!</span>
+        </Button>
+	</div>
+
+    <div class="test-section">
+		<h2 class="section-title">Icon-only Button (Primary)</h2>
+		<Button icon="⚙️" viewType="primary" aria-label="Settings" onclick={handleButtonClick}></Button>
+	</div>
+    <div class="test-section">
+		<h2 class="section-title">Icon-only Button (Outline)</h2>
+		<Button icon="🗑️" viewType="outline" aria-label="Delete" onclick={handleButtonClick}></Button>
+	</div>
+
+    <div class="test-section">
+		<h2 class="section-title">Button as Link (href)</h2>
+		<Button href="https://svelte.dev" target="_blank">Visit Svelte</Button>
+	</div>
+
+    <div class="test-section">
+		<h2 class="section-title">Button as Link (Outline, new tab)</h2>
+		<Button href="https://kit.svelte.dev" viewType="outline" target="_blank" rel="noopener noreferrer">SvelteKit Docs</Button>
+	</div>
+
+	<div class="test-section">
+		<h2 class="section-title">Submit Button (Primary)</h2>
+		<Button type="submit" viewType="primary" onclick={(e) => { e.preventDefault(); alert('Form submitted (simulated)'); }}>Submit Form</Button>
+	</div>
+
+    <div class="test-section">
+		<h2 class="section-title">Reset Button (Ghost)</h2>
+		<Button type="reset" viewType="ghost" onclick={() => alert('Form reset (simulated)')}>Reset Form</Button>
 	</div>
 </div>
+
+<style>
+    .page-container {
+        padding: 1.5rem;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    .page-title {
+        font-size: 1.75rem; /* Larger than text-xl */
+        font-weight: bold;
+        margin-bottom: 1.5rem;
+        color: #333;
+    }
+    .test-section {
+        margin-bottom: 1.5rem;
+        padding: 1rem;
+        border: 1px solid #e0e0e0;
+        border-radius: 0.5rem;
+        background-color: #f9f9f9;
+    }
+    .section-title {
+        font-size: 1.25rem; /* text-lg */
+        font-weight: 600; /* font-semibold */
+        margin-bottom: 1rem;
+        color: #555;
+    }
+    .note {
+        font-size: 0.875rem; /* text-sm */
+        color: #777; /* text-gray-500 */
+        margin-top: 0.5rem;
+    }
+
+    /* Example for custom class styling, if needed for the test page */
+    :global(.my-custom-button-class) {
+        background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+        color: white;
+        border: none;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    :global(.my-custom-button-class:hover) {
+        opacity: 0.9;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    /* Ensure buttons in a section have some space */
+    .test-section > :global(button), 
+    .test-section > :global(a[role="button"]) {
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+</style>
