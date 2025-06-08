@@ -1,0 +1,15 @@
+send_metrics = false
+
+name = "inja_chat"
+main = "./.svelte-kit/cloudflare/_worker.js"
+compatibility_date = "2025-01-01"
+compatibility_flags = ["nodejs_compat"]
+workers_dev = true
+
+[assets]
+directory = ".svelte-kit/cloudflare"
+binding = "ASSETS"
+
+[env.production]
+workers_dev = false
+route = "chat.inja.online/*"
