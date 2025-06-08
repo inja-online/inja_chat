@@ -242,9 +242,37 @@
         background-color: hsl(var(--secondary));
         color: hsl(var(--secondary-foreground));
     }
-    .button-secondary.active {
-        background-color: hsl(var(--secondary));
-        color: hsl(var(--secondary-foreground));
+    /* Updated styles for active and data-selected="true" states */
+    .button-secondary.active,
+    .button-secondary[data-selected="true"] {
+        background-color: var(--button-secondary-active-bg);
+        color: var(--button-secondary-active-text-color);
+        outline: none;
+        border-color: transparent; /* Ensure no border conflicts */
+        box-shadow: var(--shadow-md);
+        backdrop-filter: none; /* Remove backdrop-filter for solid active state */
+    }
+    .button-secondary.active:hover:not(:disabled),
+    .button-secondary[data-selected="true"]:hover:not(:disabled) {
+        background-color: var(--button-secondary-active-hover-bg);
+        color: var(--button-secondary-active-text-color); /* Ensure text color remains */
+    }
+    /* Ensure "pressed" state reverts to base active background */
+    .button-secondary.active:active:not(:disabled),
+    .button-secondary[data-selected="true"]:active:not(:disabled) {
+        background-color: var(--button-secondary-active-bg);
+    }
+
+    /* Ensure disabled active/selected state retains active background and doesn't change on hover */
+    .button-secondary.active:disabled,
+    .button-secondary[data-selected="true"]:disabled {
+        background-color: var(--button-secondary-active-bg);
+        color: var(--button-secondary-active-text-color);
+        /* Opacity is handled by the global .button:disabled style */
+    }
+    .button-secondary.active:disabled:hover, /* Specific to prevent hover change when active & disabled */
+    .button-secondary[data-selected="true"]:disabled:hover {
+        background-color: var(--button-secondary-active-bg); 
     }
     
     .button-secondary[data-selected="false"] {

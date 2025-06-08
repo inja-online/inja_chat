@@ -64,6 +64,11 @@
     /* Shadow utilities */
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
     --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+
+    /* New variables for active secondary button */
+    --button-secondary-active-bg: rgb(162,59,103);
+    --button-secondary-active-hover-bg: #d56698;
+    --button-secondary-active-text-color: hsl(var(--primary-foreground));
 }
 
 
