@@ -1,15 +1,35 @@
 send_metrics = false
 
-name = "inja_chat"
+name = "inja-chat"
 main = "./.svelte-kit/cloudflare/_worker.js"
 compatibility_date = "2025-01-01"
 compatibility_flags = ["nodejs_compat"]
 workers_dev = true
+
+[build]
+command = "pnpm run build"
 
 [assets]
 directory = ".svelte-kit/cloudflare"
 binding = "ASSETS"
 
 [env.production]
+name = "inja-chat-production"
 workers_dev = false
 route = "chat.inja.online/*"
+
+[env.preview]
+name = "inja-chat-preview"
+workers_dev = true
+
+[[env.production.kv_namespaces]]
+binding = "CHAT_KV"
+id = "your_kv_namespace_id"
+
+[[env.production.d1_databases]]
+binding = "CHAT_DB"
+database_name = "inja-chat-db"
+database_id = "your_d1_database_id"
+
+[vars]
+NODE_ENV = "production"

@@ -1,22 +1,12 @@
-<script>
-    let progressItems = [
-        { 
-            text: "Create repo", 
-            completed: true 
-        },
-        { 
-            text: "Connect to Cloudflare", 
-            completed: true 
-        },
-        { 
-            text: "CI/CD", 
-            completed: true 
-        },
-        { 
-            text: "Core components + colors", 
-            completed: false 
-        },
-    ];
+<script lang="ts">
+	let count = $state(0);
+	let message = $state('Welcome to InjaChat!');
+
+	function increment() {
+		count += 1;
+	}
+
+	let displayMessage = $derived(`${message} You've clicked ${count} times.`);
 </script>
 
 <svelte:head>
@@ -81,3 +71,41 @@
         </div>
     </div>
 </main>
+
+<div class="max-w-4xl mx-auto text-center space-y-8">
+	<h1 class="text-4xl font-bold text-gradient">
+		{message}
+	</h1>
+
+	<p class="text-lg text-neutral-600">
+		Advanced Client-First AI Chat Platform built with SvelteKit 5 and Tailwind CSS v4
+	</p>
+
+	<div class="space-y-4">
+		<p class="text-xl">{displayMessage}</p>
+		
+		<button 
+			onclick={increment}
+			class="chat-button primary"
+		>
+			Click me!
+		</button>
+	</div>
+
+	<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+		<div class="p-6 rounded-xl border border-neutral-200 bg-white shadow-sm">
+			<h3 class="text-lg font-semibold mb-2">🚀 Client-First Architecture</h3>
+			<p class="text-neutral-600">Optimized for performance with offline capabilities and edge computing.</p>
+		</div>
+		
+		<div class="p-6 rounded-xl border border-neutral-200 bg-white shadow-sm">
+			<h3 class="text-lg font-semibold mb-2">🤖 Advanced LLM Integration</h3>
+			<p class="text-neutral-600">Support for multiple AI models with streaming responses and context management.</p>
+		</div>
+		
+		<div class="p-6 rounded-xl border border-neutral-200 bg-white shadow-sm">
+			<h3 class="text-lg font-semibold mb-2">🎨 Modern UI/UX</h3>
+			<p class="text-neutral-600">Beautiful interface with Tailwind CSS v4 and custom animations.</p>
+		</div>
+	</div>
+</div>

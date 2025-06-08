@@ -1,4 +1,95 @@
-@import 'tailwindcss';
+@import "tailwindcss";
+
+@config {
+  --default-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  --font-mono: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas,
+    "Courier New", monospace;
+
+  --color-primary: #3b82f6;
+  --color-primary-dark: #1d4ed8;
+  --color-primary-light: #60a5fa;
+
+  --color-secondary: #6366f1;
+  --color-secondary-dark: #4338ca;
+  --color-secondary-light: #818cf8;
+
+  --color-accent: #f59e0b;
+  --color-accent-dark: #d97706;
+  --color-accent-light: #fbbf24;
+
+  --color-success: #10b981;
+  --color-success-dark: #059669;
+  --color-success-light: #34d399;
+
+  --color-warning: #f59e0b;
+  --color-warning-dark: #d97706;
+  --color-warning-light: #fbbf24;
+
+  --color-error: #ef4444;
+  --color-error-dark: #dc2626;
+  --color-error-light: #f87171;
+
+  --color-info: #06b6d4;
+  --color-info-dark: #0891b2;
+  --color-info-light: #22d3ee;
+
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-200: #e5e5e5;
+  --color-neutral-300: #d4d4d4;
+  --color-neutral-400: #a3a3a3;
+  --color-neutral-500: #737373;
+  --color-neutral-600: #525252;
+  --color-neutral-700: #404040;
+  --color-neutral-800: #262626;
+  --color-neutral-900: #171717;
+  --color-neutral-950: #0a0a0a;
+
+  --color-chat-user-bg: var(--color-primary);
+  --color-chat-user-text: white;
+  --color-chat-ai-bg: var(--color-neutral-100);
+  --color-chat-ai-text: var(--color-neutral-900);
+
+  --border-radius-xs: 0.125rem;
+  --border-radius-sm: 0.25rem;
+  --border-radius-md: 0.375rem;
+  --border-radius-lg: 0.5rem;
+  --border-radius-xl: 0.75rem;
+  --border-radius-2xl: 1rem;
+  --border-radius-3xl: 1.5rem;
+  --border-radius-full: 9999px;
+
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1),
+    0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 0.75rem;
+  --spacing-lg: 1rem;
+  --spacing-xl: 1.5rem;
+  --spacing-2xl: 2rem;
+  --spacing-3xl: 3rem;
+
+  --animation-duration-fast: 150ms;
+  --animation-duration-normal: 300ms;
+  --animation-duration-slow: 500ms;
+
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+  --z-toast: 1080;
+}
+
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
 
@@ -51,4 +142,223 @@
     --chat-input-background: hsla(270, 0%, 100%, var(--blur-fallback, 0.1));
     --chat-overlay: hsla(309, 63%, 92%, var(--blur-fallback, 0.72));
     --wordmark-color: #ca0277;
+}
+@plugin '@tailwindcss/typography';
+
+@media (prefers-color-scheme: dark) {
+  @config {
+    --color-chat-ai-bg: var(--color-neutral-800);
+    --color-chat-ai-text: var(--color-neutral-100);
+  }
+}
+
+@utility pulse-glow {
+  animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+  }
+  50% {
+    opacity: 0.8;
+    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+  }
+}
+
+@utility fade-in {
+  animation: fade-in var(--animation-duration-normal) ease-in-out;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@utility slide-in-bottom {
+  animation: slide-in-bottom var(--animation-duration-normal) ease-out;
+}
+
+@keyframes slide-in-bottom {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@utility slide-in-right {
+  animation: slide-in-right var(--animation-duration-normal) ease-out;
+}
+
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@utility bounce-in {
+  animation: bounce-in var(--animation-duration-slow)
+    cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes bounce-in {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@utility typing-indicator {
+  animation: typing-indicator 1.4s infinite;
+}
+
+@keyframes typing-indicator {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-10px);
+  }
+}
+
+@utility shimmer {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.chat-message {
+  @apply rounded-lg px-4 py-2 max-w-[80%] break-words;
+}
+
+.chat-message.user {
+  @apply bg-[var(--color-chat-user-bg)] text-[var(--color-chat-user-text)] ml-auto;
+}
+
+.chat-message.ai {
+  @apply bg-[var(--color-chat-ai-bg)] text-[var(--color-chat-ai-text)] mr-auto;
+}
+
+.chat-input {
+  @apply w-full px-4 py-3 border border-neutral-300 rounded-lg 
+		focus:ring-2 focus:ring-primary focus:border-transparent 
+		placeholder:text-neutral-500 transition-all duration-200;
+}
+
+.chat-button {
+  @apply px-4 py-2 rounded-lg font-medium transition-all duration-200
+		focus:ring-2 focus:ring-offset-2 focus:outline-none;
+}
+
+.chat-button.primary {
+  @apply bg-[var(--color-primary)] text-white hover:bg-[var(--color-primary-dark)]
+		focus:ring-[var(--color-primary)];
+}
+
+.chat-button.secondary {
+  @apply bg-[var(--color-secondary)] text-white hover:bg-[var(--color-secondary-dark)]
+		focus:ring-[var(--color-secondary)];
+}
+
+.chat-button.outline {
+  @apply border border-neutral-300 text-neutral-700 hover:bg-neutral-50
+		focus:ring-neutral-500;
+}
+
+.chat-sidebar {
+  @apply fixed left-0 top-0 h-full w-64 bg-white border-r border-neutral-200
+		transform transition-transform duration-300 ease-in-out z-[var(--z-fixed)];
+}
+
+.chat-sidebar.closed {
+  @apply -translate-x-full;
+}
+
+.code-block {
+  @apply bg-neutral-900 text-neutral-100 rounded-lg p-4 overflow-x-auto
+		font-mono text-sm;
+}
+
+.loading-dots {
+  @apply flex space-x-1;
+}
+
+.loading-dots div {
+  @apply w-2 h-2 bg-neutral-400 rounded-full typing-indicator;
+}
+
+.loading-dots div:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loading-dots div:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.glassmorphism {
+  @apply backdrop-blur-md bg-white/10 border border-white/20;
+}
+
+.text-gradient {
+  @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+html {
+  font-family: var(--default-font-family);
+}
+
+body {
+  @apply bg-neutral-50 text-neutral-900 antialiased;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    @apply bg-neutral-950 text-neutral-100;
+  }
 }
