@@ -19,23 +19,30 @@
 	</div>
 
 	<div class="test-section">
-		<h2 class="section-title">Outline Button</h2>
+		<h2 class="section-title">Secondary Button (formerly Outline)</h2>
+		<Button viewType="secondary" onclick={handleButtonClick}>Secondary Action</Button>
+	</div>
+
+	<div class="test-section">
+		<h2 class="section-title">Outline Button (formerly Ghost)</h2>
 		<Button viewType="outline" onclick={handleButtonClick}>Outline Action</Button>
 	</div>
 
 	<div class="test-section">
-		<h2 class="section-title">Ghost Button</h2>
+		<h2 class="section-title">New Ghost Button</h2>
 		<Button viewType="ghost" onclick={handleButtonClick}>Ghost Action</Button>
+		<Button viewType="ghost" icon="👻" aria-label="Ghost Icon Button" onclick={handleButtonClick}></Button>
+		<Button viewType="ghost" icon="⚙️" onclick={handleButtonClick}>Settings</Button>
 	</div>
-
+	
 	<div class="test-section">
 		<h2 class="section-title">Active Button (Primary)</h2>
 		<Button viewType="primary" active={true} onclick={handleButtonClick}>Active Primary</Button>
 	</div>
 
     <div class="test-section">
-		<h2 class="section-title">Active Button (Outline)</h2>
-		<Button viewType="outline" active={true} onclick={handleButtonClick}>Active Outline</Button>
+		<h2 class="section-title">Active Button (Secondary)</h2>
+		<Button viewType="secondary" active={true} onclick={handleButtonClick}>Active Secondary</Button>
 	</div>
 
 	<div class="test-section">
@@ -50,8 +57,19 @@
 	</div>
 
     <div class="test-section">
-		<h2 class="section-title">Disabled Button (Outline)</h2>
+		<h2 class="section-title">Disabled Button (Secondary)</h2>
+		<Button viewType="secondary" disabled={true} onclick={handleButtonClick}>Disabled Secondary</Button>
+	</div>
+	
+    <div class="test-section">
+		<h2 class="section-title">Disabled Button (Outline - New)</h2>
 		<Button viewType="outline" disabled={true} onclick={handleButtonClick}>Disabled Outline</Button>
+	</div>
+
+    <div class="test-section">
+		<h2 class="section-title">Disabled Button (Ghost - New)</h2>
+		<Button viewType="ghost" disabled={true} onclick={handleButtonClick}>Disabled Ghost</Button>
+		<Button viewType="ghost" icon="🚫" disabled={true} aria-label="Disabled Ghost Icon" onclick={handleButtonClick}></Button>
 	</div>
 
 	<div class="test-section">
@@ -71,9 +89,18 @@
 		<Button icon="⚙️" viewType="primary" aria-label="Settings" onclick={handleButtonClick}></Button>
 	</div>
     <div class="test-section">
-		<h2 class="section-title">Icon-only Button (Outline)</h2>
-		<Button icon="🗑️" viewType="outline" aria-label="Delete" onclick={handleButtonClick}></Button>
+		<h2 class="section-title">Icon-only Button (Secondary)</h2>
+		<Button icon="🗑️" viewType="secondary" aria-label="Delete" onclick={handleButtonClick}></Button>
 	</div>
+    <div class="test-section">
+		<h2 class="section-title">Icon-only Button (Outline - New)</h2>
+		<Button icon="✏️" viewType="outline" aria-label="Edit" onclick={handleButtonClick}></Button>
+	</div>
+    <div class="test-section">
+		<h2 class="section-title">Icon-only Button (Ghost - New)</h2>
+		<Button icon="📋" viewType="ghost" aria-label="Copy" onclick={handleButtonClick}></Button>
+	</div>
+
 
     <div class="test-section">
 		<h2 class="section-title">Button as Link (href)</h2>
@@ -81,8 +108,8 @@
 	</div>
 
     <div class="test-section">
-		<h2 class="section-title">Button as Link (Outline, new tab)</h2>
-		<Button href="https://kit.svelte.dev" viewType="outline" target="_blank" rel="noopener noreferrer">SvelteKit Docs</Button>
+		<h2 class="section-title">Button as Link (Secondary, new tab)</h2>
+		<Button href="https://kit.svelte.dev" viewType="secondary" target="_blank" rel="noopener noreferrer">SvelteKit Docs</Button>
 	</div>
 
 	<div class="test-section">
@@ -91,20 +118,27 @@
 	</div>
 
     <div class="test-section">
-		<h2 class="section-title">Reset Button (Ghost)</h2>
+		<h2 class="section-title">Reset Button (Outline - New)</h2>
+		<Button type="reset" viewType="outline" onclick={() => alert('Form reset (simulated)')}>Reset Form</Button>
+	</div>
+	
+    <div class="test-section">
+		<h2 class="section-title">Reset Button (Ghost - New)</h2>
 		<Button type="reset" viewType="ghost" onclick={() => alert('Form reset (simulated)')}>Reset Form</Button>
 	</div>
 
 	<!-- Add new section for rounded variants -->
-	<section>
-		<h3>Rounded Variants</h3>
+	<section class="test-section"> <!-- Added test-section class for consistent styling -->
+		<h3 class="section-title">Rounded Variants</h3> <!-- Changed to section-title -->
 		<div class="button-group">
 			<Button viewType="primary" rounded={true}>Full Round (default)</Button>
 			<Button viewType="primary" rounded={false}>Half Round</Button>
+			<Button viewType="secondary" rounded={true}>Full Round Secondary</Button>
+			<Button viewType="secondary" rounded={false}>Half Round Secondary</Button>
 			<Button viewType="outline" rounded={true}>Full Round Outline</Button>
 			<Button viewType="outline" rounded={false}>Half Round Outline</Button>
-			<Button viewType="ghost" rounded={true}>Full Round Ghost</Button>
-			<Button viewType="ghost" rounded={false}>Half Round Ghost</Button>
+			<Button viewType="ghost" rounded={true}>Ghost (Pill - if supported by rounded prop)</Button> <!-- Ghost default is 0.5rem, rounded=true might make it pill -->
+			<Button viewType="ghost" rounded={false}>Ghost (Half Round - default for ghost)</Button>
 		</div>
 	</section>
 
@@ -112,15 +146,16 @@
 		<h2 class="section-title">Buttons with Tooltips</h2>
 		<div class="button-group">
 			<Button tooltip="This is a primary action!">Primary with Tooltip</Button>
-			<Button viewType="outline" tooltip="Tooltip on the bottom!" tooltipPosition="bottom">
-				Outline with Tooltip (Bottom)
+			<Button viewType="secondary" tooltip="Tooltip on the bottom!" tooltipPosition="bottom">
+				Secondary with Tooltip (Bottom)
 			</Button>
-			<Button viewType="ghost" icon="💡" tooltip="Left tooltip" tooltipPosition="left"></Button>
+			<Button viewType="outline" icon="💡" tooltip="Left tooltip on outline" tooltipPosition="left"></Button>
 			<Button
+				viewType="ghost"
 				icon="➡️"
-				tooltip="Right tooltip on a half-rounded button"
+				tooltip="Right tooltip on ghost button"
 				tooltipPosition="right"
-				rounded={false}
+				rounded={false} <!-- Ghost is already 0.5rem radius -->
 			></Button>
 			<Button viewType="primary" disabled tooltip="This button is disabled">Disabled with Tooltip</Button>
 		</div>
